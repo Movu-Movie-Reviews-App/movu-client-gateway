@@ -5,6 +5,7 @@ import { SearchContentDto } from './dto/search-content.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { NATS_SERVICE } from 'src/config';
 import { OptionalAuth } from 'src/auth/decorators/optional-auth.decorator';
+import { GetUserId } from 'src/auth/decorators/get-user-id.decorator';
 
 @Controller('content')
 export class ContentController {
@@ -12,23 +13,24 @@ export class ContentController {
 
   @Get()
   findAll(@Query() query: FindContentDto) {
-    return this.contentService.findAll(query);
+    return this.client.send('content.findAll', FindContentDto)
   }
 
   @Get('search')
   search(@Query() query: SearchContentDto) {
-    return this.contentService.findAll(query);
+    return this.client.send('content.search', query)
   }
 
   @Get('top-rated-week')
   @OptionalAuth()
-  findTopRatedOfTheWeek(@Query() query: FindContentDto, @GetUser() user: User) {
-    return this.contentService.findTopRatedOfTheWeek(query, user?.id);
+  findTopRatedOfTheWeek(@Query() query: FindContentDto) {
+    return this.client.send('content.findTopRatedOfTheWeek', query)
   }
 
   @Get('home')
   @OptionalAuth()
-  getHomeContent(@Query('contentType', new ParseEnumPipe(ContentTypeEnum)) contentType: ContentTypeEnum, @GetUser() user: User) {
-    return this.contentService.getHomeContent(contentType, user?.id);
+  getHomeContent(@Query('contentType', new ParseEnumPipe(ContentTypeEnum)) contentType: ContentTypeEnum, @GetUserId() userId: string) {
+    //TODO! completar la respuesta buscando los wishlist y favoritos para luego armar un response (BFF)
+    return this.client.send('content.findByGenre', {})
   }
 }
