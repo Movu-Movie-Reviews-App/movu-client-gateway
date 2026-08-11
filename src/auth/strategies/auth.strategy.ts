@@ -1,5 +1,4 @@
 import { PassportStrategy } from "@nestjs/passport";
-import { UserDto } from "../dto/user.dto";
 import { NATS_SERVICE } from "src/config";
 import { ClientProxy } from "@nestjs/microservices";
 import { Inject, UnauthorizedException } from "@nestjs/common";
@@ -28,7 +27,7 @@ export class AuthStrategy extends PassportStrategy(Strategy, 'auth') {
 
         const response = await firstValueFrom(
             this.authClient.send(
-                'auth.validateToken',
+                'auth.check-status',
                 { token },
             ),
         );
