@@ -13,7 +13,7 @@ export class WishlistController {
   @Post()
   @Auth()
   create(@GetUserId() userId: string, @Body() createWishlistDto: CreateWishlistDto) {
-    return this.client.send('wishlist.create', { userId, createWishlistDto })
+    return this.client.send('wishlist.create', { userId, ...createWishlistDto })
   }
 
   @Get()

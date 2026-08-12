@@ -21,7 +21,7 @@ export class ReviewController {
     @Param('contentId', ParseUUIDPipe) contentId: string,
     @Query() findReviewsDto: FindReviewsDto, @GetUserId() userId?: string
   ) {
-    return this.client.send('reviews.findByContent', { userId, contentId, ...findReviewsDto })
+    return this.client.send('reviews.findByContent', { userId, contentId, query: findReviewsDto })
   }
 
 
@@ -38,7 +38,7 @@ export class ReviewController {
   @Auth()
   create(@Body() createReviewDto: CreateReviewDto, @GetUserId() userId: string) {
 
-    return this.client.send('reviews.create', { userId, createReviewDto })
+    return this.client.send('reviews.create', { userId, ...createReviewDto })
   }
 
   @Delete(':id')
@@ -50,7 +50,7 @@ export class ReviewController {
   @Patch(':id')
   @Auth()
   update(@Param('id', ParseUUIDPipe) id: string, @GetUserId() userId: string, @Body() updateReviewDto: UpdateReviewDto) {
-    return this.client.send('reviews.update', { id, userId, updateReviewDto });
+    return this.client.send('reviews.update', { id, userId, ...updateReviewDto });
   }
 
 

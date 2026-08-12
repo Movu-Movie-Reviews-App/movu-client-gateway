@@ -12,7 +12,7 @@ export class TmdbSyncController {
 
   @Post()
   syncAll(@Query() queryParameters: TmdbSyncPaginationDto) {
-    return this.client.send('sync.all', { queryParameters })
+    return this.client.send('sync.all', queryParameters)
   }
 
   @Post('movie-genres')
@@ -27,12 +27,12 @@ export class TmdbSyncController {
 
   @Post('popular-movies')
   syncPopularMovies(@Query() queryParameters: TmdbSyncPaginationDto) {
-    return this.client.send('sync.popularMovies', { queryParameters })
+    return this.client.send('sync.popularMovies', queryParameters)
   }
 
   @Post('popular-series')
   syncPopularSeries(@Query() queryParameters: TmdbSyncPaginationDto) {
-    return this.client.send('sync.popularSeries', { queryParameters })
+    return this.client.send('sync.popularSeries', queryParameters)
   }
 
   @Get('clear')

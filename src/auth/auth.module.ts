@@ -11,6 +11,7 @@ import { NatsModule } from 'src/transport/nats.module';
   imports: [
     PassportModule.register({ defaultStrategy: 'auth' }),
     NatsModule
-  ]
+  ],
+  exports: [PassportModule]
 })
 export class AuthModule { }

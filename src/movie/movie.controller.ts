@@ -15,7 +15,7 @@ export class MoviesController {
   @Get(':id')
   @OptionalAuth()
   findMovieDetails(@Param('id', ParseUUIDPipe) id: string, @GetUserId() userId: string) {
-    return this.client.send('movies.findDetails', id);
+    return this.client.send('movies.findDetails', { id });
   }
 
 }

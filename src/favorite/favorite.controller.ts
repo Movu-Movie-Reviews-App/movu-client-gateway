@@ -14,7 +14,7 @@ export class FavoriteController {
   @Post()
   @Auth()
   create(@GetUserId() userId: string, @Body() createFavoriteDto: CreateFavoriteDto) {
-    return this.client.send('favorites.create', { userId, createFavoriteDto })
+    return this.client.send('favorites.create', { userId, ...createFavoriteDto })
   }
 
   @Get()

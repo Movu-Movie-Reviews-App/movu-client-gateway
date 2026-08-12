@@ -13,7 +13,7 @@ export class GenresController {
   @Get()
   findAllByContentType(@Query('contentType') contentType: ContentTypeEnum) {
 
-    return this.client.send('genres.findAllByContentType', contentType)
+    return this.client.send('genres.findAllByContentType', { contentType })
   }
 
 

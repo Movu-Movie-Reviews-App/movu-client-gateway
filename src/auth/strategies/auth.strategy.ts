@@ -25,14 +25,23 @@ export class AuthStrategy extends PassportStrategy(Strategy, 'auth') {
 
         const token = authHeader.split(' ')[1];
 
-        const response = await firstValueFrom(
-            this.authClient.send(
-                'auth.check-status',
-                { token },
-            ),
-        );
+        // auth-service owns the signing secret, so it is the only place the token
+        // can actually be verified. Any failure there means "not authenticated",
+        // never a 500.
+        let response: { valid: boolean; user: unknown };
 
-        if (!response.valid) {
+        try {
+            response = await firstValueFrom(
+                this.authClient.send(
+                    'auth.check-status',
+                    { token },
+                ),
+            );
+        } catch {
+            throw new UnauthorizedException('Invalid token');
+        }
+
+        if (!response?.valid) {
             throw new UnauthorizedException('Invalid token');
         }
 
