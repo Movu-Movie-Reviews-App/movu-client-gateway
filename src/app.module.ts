@@ -17,15 +17,13 @@ import { TmdbSyncModule } from './tmdb-sync/tmdb-sync.module';
     NatsModule,
     AuthModule,
     ContentModule,
+    MovieModule,
     SeriesModule,
     GenresModule,
     ReviewModule,
     FavoriteModule,
     WishlistModule,
     TmdbSyncModule,
-    // MoviesController is @Controller() with GET /:id — catches any single-segment
-    // path, so it must stay last or it shadows genres/favorite/wishlist routes.
-    MovieModule,
   ],
 })
 export class AppModule { }

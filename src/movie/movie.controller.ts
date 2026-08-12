@@ -4,7 +4,7 @@ import { GetUserId } from 'src/auth/decorators/get-user-id.decorator';
 import { OptionalAuth } from 'src/auth/decorators/optional-auth.decorator';
 import { NATS_SERVICE } from 'src/config/services';
 
-@Controller()
+@Controller('movies')
 export class MoviesController {
   constructor(
     @Inject(NATS_SERVICE) private readonly client: ClientProxy
