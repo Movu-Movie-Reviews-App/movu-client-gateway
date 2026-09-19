@@ -15,18 +15,18 @@ export class MediaController {
   @Auth()
   @Post('/upload')
   create(@Body() createMediaDto: CreateMediaRequestDto, @GetUserId() userId: string) {
-    return this.client.send('media.uploadMedia', { ...createMediaDto, userId });
+    return this.client.send('media.uploadMedia', { ...createMediaDto, ownerId: userId });
   }
 
   @Auth()
-  @Post('/completeUpload{mediaPurpose}/{mediaId}')
+  @Post('/completeUpload/:mediaPurpose/:mediaId')
   completeUpload(@Param('mediaPurpose', new ParseEnumPipe(MediaPurposeEnum)) mediaPurpose: MediaPurposeEnum, @Param('mediaId', new ParseUUIDPipe()) mediaId: string, @GetUserId() userId: string) {
-    return this.client.send('media.completeMediaUpload', { mediaPurpose, mediaId, userId });
+    return this.client.send('media.completeMediaUpload', { mediaPurpose, mediaId, ownerId: userId });
   }
 
   @Auth()
-  @Get('/{mediaPurpose}/{mediaId}/download-url')
+  @Get('/:mediaPurpose/:mediaId/download-url')
   getDownloadUrl(@Param('mediaPurpose', new ParseEnumPipe(MediaPurposeEnum)) mediaPurpose: MediaPurposeEnum, @Param('mediaId', new ParseUUIDPipe()) mediaId: string, @GetUserId() userId: string) {
-    return this.client.send('media.getDownloadUrl', { mediaPurpose, mediaId, userId });
+    return this.client.send('media.getDownloadUrl', { mediaPurpose, mediaId, ownerId: userId });
   }
 }
