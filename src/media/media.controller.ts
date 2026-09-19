@@ -1,10 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Inject, ParseEnumPipe, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Inject, ParseEnumPipe, ParseUUIDPipe } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { NATS_SERVICE } from 'src/config/services';
 import { CreateMediaRequestDto } from './dto/request/create-media.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { GetUserId } from 'src/auth/decorators/get-user-id.decorator';
-import { CreateMediaResponseDto } from './dto/response/create-media-response.dto';
 import { MediaPurposeEnum } from './enums/media-purpose.enum';
 
 @Controller('media')
