@@ -10,6 +10,7 @@ import { ReviewModule } from './review/review.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { TmdbSyncModule } from './tmdb-sync/tmdb-sync.module';
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { TmdbSyncModule } from './tmdb-sync/tmdb-sync.module';
     FavoriteModule,
     WishlistModule,
     TmdbSyncModule,
+    MediaModule,
   ],
 })
 export class AppModule { }
