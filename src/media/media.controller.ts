@@ -15,7 +15,13 @@ export class MediaController {
   @Auth()
   @Post('/upload')
   create(@Body() createMediaDto: CreateMediaRequestDto, @GetUserId() userId: string) {
-    return this.client.send('media.create', { ...createMediaDto, userId });
+    return this.client.send('media.uploadMedia', { ...createMediaDto, userId });
+  }
+
+  @Auth()
+  @Post('/completeUpload{mediaPurpose}/{mediaId}')
+  completeUpload(@Param('mediaPurpose', new ParseEnumPipe(MediaPurposeEnum)) mediaPurpose: MediaPurposeEnum, @Param('mediaId', new ParseUUIDPipe()) mediaId: string, @GetUserId() userId: string) {
+    return this.client.send('media.completeMediaUpload', { mediaPurpose, mediaId, userId });
   }
 
   @Auth()
