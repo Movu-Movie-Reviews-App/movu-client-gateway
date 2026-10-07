@@ -51,9 +51,6 @@ export class ReviewController {
   /**
    * Reviews only store a userId — the profile lives in user-service — so the gateway
    * resolves the authors in one bulk call and attaches them.
-   *
-   * A review outlives its author (deleted account), so a missing user degrades to a
-   * placeholder instead of leaving `user` undefined for the client to trip over.
    */
   private async attachAuthors(reviews: any[]) {
 
