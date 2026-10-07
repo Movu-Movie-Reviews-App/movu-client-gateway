@@ -6,7 +6,7 @@ steps:
         "-t",
         "northamerica-northeast1-docker.pkg.dev/movu-reviews-project/image-registry/client-gateway",
         "-f",
-        "dockerfile.prod",
+        "Dockerfile.prod",
         "--platform=linux/amd64",
         ".",
       ]
